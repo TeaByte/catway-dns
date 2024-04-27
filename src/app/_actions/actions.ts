@@ -1,38 +1,33 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { RecordType } from "~/server/cloudflare/types";
+
 import {
   createUserSubDomain,
   updateUserSubDomain,
   deleteUserSubDomain,
 } from "~/server/apis";
 
-import { authOptions } from "~/server/auth";
-import { getServerSession } from "next-auth";
-
 export async function addSubDomain(formData: FormData) {
   "use server";
 
   const rawFormData = {
+    sessionUserId: formData.get("sessionuserid"),
     record: formData.get("record"),
     subdomain: formData.get("subdomain"),
     content: formData.get("content"),
   };
 
+  const sessionUserId = rawFormData.sessionUserId?.toString();
   const subdomain = rawFormData.subdomain?.toString();
   const record = rawFormData.record?.toString() as RecordType;
   const content = rawFormData.content?.toString();
 
-  if (!record || !subdomain || !content) {
+  if (!sessionUserId || !record || !subdomain || !content) {
     throw new Error("Invalid form data");
   }
 
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    throw new Error("Unauthorized");
-  }
-
-  await createUserSubDomain(subdomain, record, content, session.user.id);
+  await createUserSubDomain(subdomain, record, content, sessionUserId);
   revalidatePath("/");
   redirect("/");
 }

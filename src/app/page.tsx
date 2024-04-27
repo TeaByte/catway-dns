@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { authOptions } from "~/server/auth";
 import { getServerSession } from "next-auth";
 
+import { Input } from "~/components/ui/input";
+
 import {
   addSubDomain,
   deleteSubDomain,
@@ -10,11 +12,6 @@ import {
 } from "~/app/_actions/actions";
 import { getUserSubDomains } from "~/server/queries";
 
-import {
-  createUserSubDomain,
-  updateUserSubDomain,
-  deleteUserSubDomain,
-} from "~/server/apis";
 import { FormLoadingButton } from "~/components/form-loading-button";
 
 export default async function HomePage() {
@@ -34,7 +31,7 @@ export default async function HomePage() {
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <form action={addSubDomain}>
         <label htmlFor="subdomain">Subdomain</label>
-        <input
+        <Input
           type="text"
           name="subdomain"
           id="subdomain"
@@ -48,8 +45,10 @@ export default async function HomePage() {
           <option value="CNAME">CNAME</option>
         </select>
 
+        <input type="hidden" name="sessionuserid" value={session.user.id} />
+
         <label htmlFor="content">Content</label>
-        <input type="text" name="content" id="content" placeholder="content" />
+        <Input type="text" name="content" id="content" placeholder="content" />
 
         <FormLoadingButton>Create</FormLoadingButton>
       </form>
@@ -67,25 +66,23 @@ export default async function HomePage() {
               <FormLoadingButton>Delete</FormLoadingButton>
             </form>
             <form action={updateSubDomain}>
+              <Input
+                type="text"
+                name="record"
+                defaultValue={subDomain.record}
+              />
+              <Input
+                type="text"
+                name="content"
+                defaultValue={subDomain.content}
+              />
+
               <input type="hidden" name="subdomainid" value={subDomain.id} />
               <input
                 type="hidden"
                 name="sessionuserid"
                 value={session.user.id}
               />
-              <input
-                type=""
-                name="record"
-                className="text-black"
-                defaultValue={subDomain.record}
-              />
-              <input
-                type=""
-                name="content"
-                className="text-black"
-                defaultValue={subDomain.content}
-              />
-
               <FormLoadingButton>Update</FormLoadingButton>
             </form>
           </div>

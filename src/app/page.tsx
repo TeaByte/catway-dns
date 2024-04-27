@@ -15,7 +15,7 @@ import {
   updateUserSubDomain,
   deleteUserSubDomain,
 } from "~/server/apis";
-import { SubmitButton } from "~/components/submit-button";
+import { FormLoadingButton } from "~/components/form-loading-button";
 
 export default async function HomePage() {
   const session = await getServerSession(authOptions);
@@ -51,7 +51,7 @@ export default async function HomePage() {
         <label htmlFor="content">Content</label>
         <input type="text" name="content" id="content" placeholder="content" />
 
-        <button type="submit">Submit</button>
+        <FormLoadingButton>Create</FormLoadingButton>
       </form>
       <section className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
         {subDomains.map((subDomain) => (
@@ -64,7 +64,7 @@ export default async function HomePage() {
                 name="sessionuserid"
                 value={session.user.id}
               />
-              <SubmitButton />
+              <FormLoadingButton>Delete</FormLoadingButton>
             </form>
             <form action={updateSubDomain}>
               <input type="hidden" name="subdomainid" value={subDomain.id} />
@@ -86,7 +86,7 @@ export default async function HomePage() {
                 defaultValue={subDomain.content}
               />
 
-              <button type="submit">Update</button>
+              <FormLoadingButton>Update</FormLoadingButton>
             </form>
           </div>
         ))}

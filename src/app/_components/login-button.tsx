@@ -1,22 +1,29 @@
 "use client";
+
 import { useSession, signIn, signOut, getProviders } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; // Import Provider type
 
 export function SignIn() {
-  const [providers, setProviders] = useState<any>();
+  // @ts-ignore
+  const [providers, setProviders] = useState<any>(null);
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    (async () => {
+    const fetchProviders = async () => {
       const res = await getProviders();
-      setProviders(res);
-    })();
+      setProviders(res); // ...
+    };
+
+    fetchProviders()
+      .then(() => console.log("Providers fetched"))
+      .catch(console.error);
   }, []);
 
   return (
     <>
       {providers &&
-        Object.values(providers).map((provider) => (
+        // @ts-ignore
+        Object.values(providers).map((provider: any) => (
           <div key={provider.name}>
             <button onClick={() => signIn(provider.id)}>
               Sign in with {provider.name}

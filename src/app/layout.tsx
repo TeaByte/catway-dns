@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import AuthProvider from "./_components/auth-provider";
 
 import { Inter } from "next/font/google";
+import TopNav from "./_components/top-nav";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <TopNav />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

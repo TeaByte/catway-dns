@@ -79,6 +79,7 @@ export async function deleteSubDomain(formData: FormData) {
     throw new Error("Invalid form data");
   }
 
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   await deleteUserSubDomain(subDomainId, sessionUserId);
   redirect("/");
 }

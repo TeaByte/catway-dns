@@ -15,6 +15,7 @@ import {
   updateUserSubDomain,
   deleteUserSubDomain,
 } from "~/server/apis";
+import { SubmitButton } from "~/components/submit-button";
 
 export default async function HomePage() {
   const session = await getServerSession(authOptions);
@@ -63,7 +64,7 @@ export default async function HomePage() {
                 name="sessionuserid"
                 value={session.user.id}
               />
-              <button type="submit">Delete</button>
+              <SubmitButton />
             </form>
             <form action={updateSubDomain}>
               <input type="hidden" name="subdomainid" value={subDomain.id} />

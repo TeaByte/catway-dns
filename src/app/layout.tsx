@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
+      <body className={`dark font-sans ${inter.variable}`}>
         <AuthProvider>
           <TopNav />
           {children}

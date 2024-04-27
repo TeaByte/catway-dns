@@ -50,14 +50,14 @@ export const registerCloudflareDNS = async (
 };
 
 export const editCloudflareDNS = async (
-  recordId: string,
+  subDomainId: string,
   record: RecordType,
   subdomain: string,
   ip: string,
 ) => {
   try {
     const response: AxiosResponse = await axios.put(
-      `${BASE_API}/${recordId}`,
+      `${BASE_API}/${subDomainId}`,
       {
         type: record,
         name: subdomain,
@@ -75,10 +75,10 @@ export const editCloudflareDNS = async (
   }
 };
 
-export const deleteCloudflareDNS = async (recordId: string) => {
+export const deleteCloudflareDNS = async (subDomainId: string) => {
   try {
     const response: AxiosResponse = await axios.delete(
-      `${BASE_API}/${recordId}`,
+      `${BASE_API}/${subDomainId}`,
       {
         headers: BASE_HEADERS,
       },

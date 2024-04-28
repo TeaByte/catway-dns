@@ -1,12 +1,12 @@
 import "~/styles/globals.css";
 
-import { Inter } from "next/font/google";
+import { Rubik } from "next/font/google";
 
 import { Toaster } from "~/components/ui/sonner";
 import AuthProvider from "./_components/auth-provider";
 import TopNav from "./_components/top-nav";
 
-const inter = Inter({
+const font = Rubik({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`dark font-sans ${inter.variable}`}>
+      <body className={`dark font-sans ${font.variable}`}>
         <AuthProvider>
           <TopNav />
           {children}

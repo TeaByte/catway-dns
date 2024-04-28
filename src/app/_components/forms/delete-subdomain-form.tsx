@@ -23,10 +23,10 @@ export default function DeleteSubdomainForm({
   }
 
   return (
-    <form action={clientAction}>
+    <form action={clientAction} className="w-full">
       <input type="hidden" name="subdomainid" value={subDomainId} />
       <input type="hidden" name="sessionuserid" value={sessionId} />
-      <FormLoadingButton>Delete</FormLoadingButton>
+      <FormLoadingButton variant="destructive">Delete</FormLoadingButton>
     </form>
   );
 }

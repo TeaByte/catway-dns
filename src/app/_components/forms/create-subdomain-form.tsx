@@ -30,28 +30,43 @@ export default function CreateSubdomainForm({
   }
 
   return (
-    <form action={clientAction}>
-      <Label htmlFor="subdomain">Subdomain</Label>
-      <Input
-        type="text"
-        name="subdomain"
-        id="subdomain"
-        placeholder="Subdomain"
-      />
-      <Label htmlFor="record">Record</Label>
-      <Select name="record">
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Record" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="A">A</SelectItem>
-          <SelectItem value="AAAA">AAAA</SelectItem>
-          <SelectItem value="CNAME">CNAME</SelectItem>
-        </SelectContent>
-      </Select>
+    <form
+      action={clientAction}
+      className="flex w-full flex-col gap-2 rounded border p-4"
+    >
+      <div className="flex w-full gap-2">
+        <div className="w-full">
+          <Label htmlFor="subdomain">Subdomain</Label>
+          <Input
+            type="text"
+            name="subdomain"
+            id="subdomain"
+            placeholder="Subdomain"
+          />
+        </div>
+        <div className="w-full">
+          <Label htmlFor="domain">Domain</Label>
+          <Input id="domain" value={"catway.org"} disabled />
+        </div>
+      </div>
+      <div>
+        <Label htmlFor="record">Record</Label>
+        <Select name="record">
+          <SelectTrigger>
+            <SelectValue placeholder="Record" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="A">A</SelectItem>
+            <SelectItem value="AAAA">AAAA</SelectItem>
+            <SelectItem value="CNAME">CNAME</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      <div>
+        <Label htmlFor="content">Content</Label>
+        <Input type="text" name="content" id="content" placeholder="Content" />
+      </div>
       <input type="hidden" name="sessionuserid" value={sessionId} />
-      <Label htmlFor="content">Content</Label>
-      <Input type="text" name="content" id="content" placeholder="Content" />
       <FormLoadingButton>Create</FormLoadingButton>
     </form>
   );

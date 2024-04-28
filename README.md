@@ -1,7 +1,7 @@
 ### Todo
 
 - [ ] Make cloudflare proxied ( SSL ) optinal using switch-shadcnUI
-- [ ] Server action load state
+- [x] Server action load state
 - [ ] Clean up cloudflare API
 - [ ] Error handling with global error and toasts
 - [ ] Front-end, UI
@@ -11,5 +11,5 @@
 - [ ] Charts for delete/create/edit
 - [ ] Redis ratelimiter with upstach
 - [ ] PostHog analytics
-- [ ] Deploy to Vercel
+- [x] Deploy to Vercel
   - [ ] Make github actions for testing

@@ -43,6 +43,7 @@ export default async function HomePage() {
                   readOnly
                 />
                 <Link
+                  title={`Open ${subDomain.subdomain}.catway.org`}
                   href={`https://${subDomain.subdomain}.catway.org`}
                   target="_blank"
                 >
@@ -80,6 +81,7 @@ export default async function HomePage() {
             You{"'"}ve hit the subdomain limit.
             <br /> Remove one to add more or reach out at{" "}
             <Link
+              title="telegram - t.me/TeaByte"
               className="underline"
               href="https://t.me/TeaByte"
               target="_blank"

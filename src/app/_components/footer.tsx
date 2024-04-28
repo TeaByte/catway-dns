@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Separator } from "~/components/ui/separator";
 
 export default function Footer() {
@@ -6,7 +7,8 @@ export default function Footer() {
       <Separator />
       <ul className="flex items-center justify-center px-5 py-1">
         <li>
-          <a
+          <Link
+            title="Catway DNS Github repository"
             target="_blank"
             href="https://github.com/TeaByte/catway-dns"
             className="hover:underline"
@@ -14,7 +16,7 @@ export default function Footer() {
             <strong className="text-sm font-semibold">
               Please ⭐ us on Github!
             </strong>
-          </a>
+          </Link>
         </li>
       </ul>
     </footer>

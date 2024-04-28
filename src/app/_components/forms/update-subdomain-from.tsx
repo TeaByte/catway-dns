@@ -1,8 +1,11 @@
+"use client";
+
 import { updateSubDomain } from "~/app/_actions/actions";
 
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/Label";
 import { FormLoadingButton } from "~/components/form-loading-button";
+import { toast } from "sonner";
 
 export default function UpdateSubdomainForm({
   sessionId,
@@ -15,8 +18,18 @@ export default function UpdateSubdomainForm({
   record: string;
   content: string;
 }) {
+  async function clientAction(formData: FormData) {
+    const result = await updateSubDomain(formData);
+    if (result?.error) {
+      toast.error(result.error, {
+        position: "bottom-right",
+        duration: 3000,
+      });
+    }
+  }
+
   return (
-    <form action={updateSubDomain}>
+    <form action={clientAction}>
       <Label htmlFor="subdomain">Subdomain</Label>
       <Input type="text" name="record" id="record" defaultValue={record} />
       <Label htmlFor="record">Record</Label>

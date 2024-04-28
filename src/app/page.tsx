@@ -28,7 +28,7 @@ export default async function HomePage() {
       <section className="flex w-full flex-col items-center justify-center">
         {subDomains.map((subDomain) => (
           <div className="flex flex-col" key={subDomain.id}>
-            <Input value={subDomain.subdomain} />
+            <Input value={subDomain.subdomain} readOnly />
             <div className="flex justify-between">
               <UpdateSubdomainForm
                 subDomainId={subDomain.id}

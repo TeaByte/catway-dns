@@ -35,4 +35,9 @@ export interface CloudflareAPIResponse {
   messages?: string[];
 }
 
+export const allowedRecords = ["A", "AAAA", "CNAME"];
+export const isValidRecord = (record: string) => {
+  return allowedRecords.includes(record);
+};
+
 export type RecordType = "AAAA" | "A" | "CNAME";

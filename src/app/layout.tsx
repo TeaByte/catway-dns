@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
+import { Toaster } from "~/components/ui/sonner";
 import AuthProvider from "./_components/auth-provider";
 import TopNav from "./_components/top-nav";
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         <AuthProvider>
           <TopNav />
           {children}
+          <Toaster />
         </AuthProvider>
       </body>
     </html>

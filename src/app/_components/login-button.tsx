@@ -34,7 +34,6 @@ export function SignIn() {
 
 export default function SessionButton() {
   const { data: session } = useSession();
-  console.log(session);
   if (session) {
     return (
       <>

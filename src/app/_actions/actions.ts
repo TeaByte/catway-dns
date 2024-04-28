@@ -1,6 +1,7 @@
-import { revalidatePath } from "next/cache";
+"use server";
+
 import { redirect } from "next/navigation";
-import { RecordType } from "~/server/cloudflare/types";
+import { type RecordType, isValidRecord } from "~/server/cloudflare/types";
 
 import {
   createUserSubDomain,
@@ -9,8 +10,6 @@ import {
 } from "~/server/apis";
 
 export async function addSubDomain(formData: FormData) {
-  "use server";
-
   const rawFormData = {
     sessionUserId: formData.get("sessionuserid"),
     record: formData.get("record"),
@@ -24,17 +23,29 @@ export async function addSubDomain(formData: FormData) {
   const content = rawFormData.content?.toString();
 
   if (!sessionUserId || !record || !subdomain || !content) {
-    throw new Error("Invalid form data");
+    return {
+      error: "Invalid form data",
+    };
   }
 
-  await createUserSubDomain(subdomain, record, content, sessionUserId);
-  revalidatePath("/");
+  if (!isValidRecord(record)) {
+    return {
+      error: "Invalid record type",
+    };
+  }
+
+  try {
+    await createUserSubDomain(subdomain, record, content, sessionUserId);
+  } catch (error) {
+    return {
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+
   redirect("/");
 }
 
 export async function updateSubDomain(formData: FormData) {
-  "use server";
-
   const rawFormData = {
     subDomainId: formData.get("subdomainid"),
     sessionUserId: formData.get("sessionuserid"),
@@ -44,24 +55,33 @@ export async function updateSubDomain(formData: FormData) {
 
   const subDomainId = rawFormData.subDomainId?.toString();
   const sessionUserId = rawFormData.sessionUserId?.toString();
-  const record = rawFormData.record?.toString();
+  const record = rawFormData.record?.toString() as RecordType;
   const content = rawFormData.content?.toString();
 
   if (!subDomainId || !sessionUserId || !record || !content) {
-    throw new Error("Invalid form data");
+    return {
+      error: "Invalid form data",
+    };
   }
 
-  if (record !== "A" && record !== "AAAA" && record !== "CNAME") {
-    throw new Error("Invalid record type");
+  if (!isValidRecord(record)) {
+    return {
+      error: "Invalid record type",
+    };
   }
 
-  await updateUserSubDomain(content, record, subDomainId, sessionUserId);
-  revalidatePath("/");
+  try {
+    await updateUserSubDomain(content, record, subDomainId, sessionUserId);
+  } catch (error) {
+    return {
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+
+  redirect("/");
 }
 
 export async function deleteSubDomain(formData: FormData) {
-  "use server";
-
   const rawFormData = {
     subDomainId: formData.get("subdomainid"),
     sessionUserId: formData.get("sessionuserid"),
@@ -71,10 +91,18 @@ export async function deleteSubDomain(formData: FormData) {
   const sessionUserId = rawFormData.sessionUserId?.toString();
 
   if (!subDomainId || !sessionUserId) {
-    throw new Error("Invalid form data");
+    return {
+      error: "Invalid form data",
+    };
   }
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  await deleteUserSubDomain(subDomainId, sessionUserId);
+  try {
+    await deleteUserSubDomain(subDomainId, sessionUserId);
+  } catch (error) {
+    return {
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+
   redirect("/");
 }

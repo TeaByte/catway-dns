@@ -13,14 +13,11 @@ const handleAxiosError = (error: AxiosError): CloudflareError[] => {
   if (axios.isAxiosError(error)) {
     if (error.response) {
       const { data, status } = error.response;
-      console.error(`Cloudflare API Error: ${status}`);
       return (data as CloudflareAPIResponse).errors ?? UNKNOWN_ERROR;
     } else if (error.request) {
-      console.error("Cloudflare API Request Error:", error.request);
       return [{ code: 500, message: "Request Error" }];
     }
   }
-  console.error("Cloudflare API Error:", error.message);
   return [{ code: 500, message: "Unknown Error" }];
 };
 

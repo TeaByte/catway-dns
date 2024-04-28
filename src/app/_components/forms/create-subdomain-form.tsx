@@ -1,3 +1,5 @@
+"use client";
+
 import { addSubDomain } from "~/app/_actions/actions";
 
 import {
@@ -10,14 +12,25 @@ import {
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/Label";
 import { FormLoadingButton } from "~/components/form-loading-button";
+import { toast } from "sonner";
 
 export default function CreateSubdomainForm({
   sessionId,
 }: {
   sessionId: string;
 }) {
+  async function clientAction(formData: FormData) {
+    const result = await addSubDomain(formData);
+    if (result?.error) {
+      toast.error(result.error, {
+        position: "bottom-right",
+        duration: 3000,
+      });
+    }
+  }
+
   return (
-    <form action={addSubDomain}>
+    <form action={clientAction}>
       <Label htmlFor="subdomain">Subdomain</Label>
       <Input
         type="text"

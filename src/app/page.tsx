@@ -29,7 +29,7 @@ export default async function HomePage() {
   return (
     <main className="mx-4 mt-6 flex flex-col items-center justify-center gap-6 md:mx-[200px] md:mt-10 lg:mx-[300px] xl:mx-[400px] 2xl:mx-[600px]">
       <CreateSubdomainForm sessionId={session.user.id} />
-      <section className="flex w-full flex-col items-center justify-center gap-2 overflow-y-auto">
+      <section className="mb-14 flex w-full flex-col items-center justify-center gap-2 overflow-y-auto">
         <p className="w-full text-start text-sm font-semibold">
           You have ( {subDomains.length}/{user?.maxDomains} ) subdomains.
         </p>
@@ -41,7 +41,7 @@ export default async function HomePage() {
             >
               <div className="flex w-full justify-between gap-2">
                 <Input
-                  className="text-center text-lg font-semibold opacity-60"
+                  className="max-w-[150px] truncate text-center font-semibold opacity-60"
                   value={subDomain.subdomain + ".catway.org"}
                   readOnly
                 />
@@ -80,9 +80,8 @@ export default async function HomePage() {
         )}
         {subDomains.length === user?.maxDomains && (
           <p className="w-full text-center text-sm font-semibold">
-            You have reached the maximum number of subdomains.
-            <br />
-            Delete one to add more. or contact me{" "}
+            You{"'"}ve hit the subdomain limit.
+            <br /> Remove one to add more or reach out at{" "}
             <Link
               className="underline"
               href="https://t.me/TeaByte"

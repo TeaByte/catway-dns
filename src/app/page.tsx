@@ -1,18 +1,12 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { authOptions } from "~/server/auth";
 import { getServerSession } from "next-auth";
 
-import { Input } from "~/components/ui/input";
-
-import {
-  addSubDomain,
-  deleteSubDomain,
-  updateSubDomain,
-} from "~/app/_actions/actions";
 import { getUserSubDomains } from "~/server/queries";
 
-import { FormLoadingButton } from "~/components/form-loading-button";
+import CreateSubdomainForm from "./_components/forms/create-subdomain-form";
+import DeleteSubdomainForm from "./_components/forms/delete-subdomain-form";
+import UpdateSubdomainForm from "./_components/forms/update-subdomain-from";
 
 export default async function HomePage() {
   const session = await getServerSession(authOptions);
@@ -28,63 +22,22 @@ export default async function HomePage() {
   const subDomains = await getUserSubDomains(session.user.id);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <form action={addSubDomain}>
-        <label htmlFor="subdomain">Subdomain</label>
-        <Input
-          type="text"
-          name="subdomain"
-          id="subdomain"
-          placeholder="subdomain"
-        />
-
-        <label htmlFor="record">Record</label>
-        <select name="record" id="record">
-          <option value="A">A</option>
-          <option value="AAAA">AAAA</option>
-          <option value="CNAME">CNAME</option>
-        </select>
-
-        <input type="hidden" name="sessionuserid" value={session.user.id} />
-
-        <label htmlFor="content">Content</label>
-        <Input type="text" name="content" id="content" placeholder="content" />
-
-        <FormLoadingButton>Create</FormLoadingButton>
-      </form>
-      <section className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <CreateSubdomainForm sessionId={session.user.id} />
+      <section className="flex min-h-screen w-full flex-col items-center justify-center">
         {subDomains.map((subDomain) => (
           <div className="flex flex-col" key={subDomain.id}>
             {subDomain.subdomain}
-            <form action={deleteSubDomain}>
-              <input type="hidden" name="subdomainid" value={subDomain.id} />
-              <input
-                type="hidden"
-                name="sessionuserid"
-                value={session.user.id}
-              />
-              <FormLoadingButton>Delete</FormLoadingButton>
-            </form>
-            <form action={updateSubDomain}>
-              <Input
-                type="text"
-                name="record"
-                defaultValue={subDomain.record}
-              />
-              <Input
-                type="text"
-                name="content"
-                defaultValue={subDomain.content}
-              />
-
-              <input type="hidden" name="subdomainid" value={subDomain.id} />
-              <input
-                type="hidden"
-                name="sessionuserid"
-                value={session.user.id}
-              />
-              <FormLoadingButton>Update</FormLoadingButton>
-            </form>
+            <DeleteSubdomainForm
+              subDomainId={subDomain.id}
+              sessionId={session.user.id}
+            />
+            <UpdateSubdomainForm
+              subDomainId={subDomain.id}
+              content={subDomain.content}
+              record={subDomain.record}
+              sessionId={session.user.id}
+            />
           </div>
         ))}
       </section>

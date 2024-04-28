@@ -1,6 +1,6 @@
 ### Todo
 
-- [ ] Make cloudflare proxied ( SSL ) optinal using switch-shadcnUI
+- [x] Make cloudflare proxied ( SSL ) optinal using switch-shadcnUI
 - [x] Server action load state
 - [ ] Clean up cloudflare API
 - [x] Error handling with toasts

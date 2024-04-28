@@ -4,7 +4,7 @@ import { updateSubDomain } from "~/app/_actions/actions";
 
 import SwitchButton from "~/components/switch-button";
 import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/Label";
+import { Label } from "~/components/ui/label";
 import { FormLoadingButton } from "~/components/form-loading-button";
 import { toast } from "sonner";
 

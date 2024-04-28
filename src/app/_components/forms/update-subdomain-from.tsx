@@ -37,7 +37,7 @@ export default function UpdateSubdomainForm({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-full">Edit Dialog</Button>
+        <Button className="w-full">Edit</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form action={clientAction} className="grid gap-3 py-4">

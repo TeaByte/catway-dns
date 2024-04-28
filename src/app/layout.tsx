@@ -5,6 +5,7 @@ import { Rubik } from "next/font/google";
 import { Toaster } from "~/components/ui/sonner";
 import AuthProvider from "./_components/auth-provider";
 import TopNav from "./_components/top-nav";
+import Footer from "./_components/footer";
 
 const font = Rubik({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
         <AuthProvider>
           <TopNav />
           {children}
+          <Footer />
           <Toaster />
         </AuthProvider>
       </body>

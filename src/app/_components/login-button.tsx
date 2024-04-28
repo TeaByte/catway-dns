@@ -1,33 +1,22 @@
 "use client";
 
-import { useSession, signIn, signOut, getProviders } from "next-auth/react";
-import { useEffect, useState } from "react"; // Import Provider type
+import { useSession, signIn, signOut } from "next-auth/react";
 
-export function SignIn() {
-  const [providers, setProviders] = useState<any>(null);
-  const { data: session, status } = useSession();
+import { Button } from "~/components/ui/button";
+import { LogOut, Github } from "lucide-react";
 
-  useEffect(() => {
-    const fetchProviders = async () => {
-      const res = await getProviders();
-      setProviders(res); // ...
-    };
-
-    fetchProviders()
-      .then(() => console.log("Providers fetched"))
-      .catch(console.error);
-  }, []);
-
+export function SignInButton() {
   return (
     <>
-      {providers &&
-        Object.values(providers).map((provider: any) => (
-          <div key={provider.name}>
-            <button onClick={() => signIn(provider.id)}>
-              Sign in with {provider.name}
-            </button>
-          </div>
-        ))}
+      <Button
+        className="flex items-center gap-2"
+        onClick={async () => {
+          await signIn("github");
+        }}
+      >
+        <Github className="h-5 w-5" />
+        Sign in
+      </Button>
     </>
   );
 }
@@ -37,14 +26,12 @@ export default function SessionButton() {
   if (session) {
     return (
       <>
-        <p>Signed in as {session.user.id}</p>
-        <button onClick={() => signOut()}>Sign out</button>
+        <Button onClick={() => signOut()} className="flex items-center gap-2">
+          <LogOut className="h-5 w-5" />
+          Sign out
+        </Button>
       </>
     );
   }
-  return (
-    <>
-      <SignIn />
-    </>
-  );
+  return <SignInButton />;
 }

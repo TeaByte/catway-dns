@@ -41,7 +41,7 @@ export default async function HomePage() {
             >
               <div className="flex w-full justify-between gap-2">
                 <Input
-                  className="text-center text-lg font-semibold"
+                  className="text-center text-lg font-semibold opacity-60"
                   value={subDomain.subdomain + ".catway.org"}
                   readOnly
                 />

@@ -24,7 +24,7 @@ export function FormLoadingButton({
       type="submit"
       variant={variant}
       disabled={pending}
-      className="flex w-full gap-2"
+      className="flex w-full gap-1"
     >
       {pending && <LoaderCircle className="h-5 w-5 animate-spin" />}
       <span className="text-md font-semibold">{children}</span>

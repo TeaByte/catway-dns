@@ -15,12 +15,14 @@ export async function addSubDomain(formData: FormData) {
     record: formData.get("record"),
     subdomain: formData.get("subdomain"),
     content: formData.get("content"),
+    proxied: formData.get("proxied"),
   };
 
   const sessionUserId = rawFormData.sessionUserId?.toString();
   const subdomain = rawFormData.subdomain?.toString();
   const record = rawFormData.record?.toString() as RecordType;
   const content = rawFormData.content?.toString();
+  const proxied = rawFormData.proxied?.toString() === "on";
 
   if (!sessionUserId || !record || !subdomain || !content) {
     return {
@@ -35,7 +37,13 @@ export async function addSubDomain(formData: FormData) {
   }
 
   try {
-    await createUserSubDomain(subdomain, record, content, sessionUserId);
+    await createUserSubDomain(
+      subdomain,
+      record,
+      content,
+      sessionUserId,
+      proxied,
+    );
   } catch (error) {
     return {
       error: error instanceof Error ? error.message : "Unknown error",
@@ -51,12 +59,14 @@ export async function updateSubDomain(formData: FormData) {
     sessionUserId: formData.get("sessionuserid"),
     record: formData.get("record"),
     content: formData.get("content"),
+    proxied: formData.get("proxied"),
   };
 
   const subDomainId = rawFormData.subDomainId?.toString();
   const sessionUserId = rawFormData.sessionUserId?.toString();
   const record = rawFormData.record?.toString() as RecordType;
   const content = rawFormData.content?.toString();
+  const proxied = rawFormData.proxied?.toString() === "on";
 
   if (!subDomainId || !sessionUserId || !record || !content) {
     return {
@@ -71,7 +81,13 @@ export async function updateSubDomain(formData: FormData) {
   }
 
   try {
-    await updateUserSubDomain(content, record, subDomainId, sessionUserId);
+    await updateUserSubDomain(
+      content,
+      record,
+      subDomainId,
+      sessionUserId,
+      proxied,
+    );
   } catch (error) {
     return {
       error: error instanceof Error ? error.message : "Unknown error",

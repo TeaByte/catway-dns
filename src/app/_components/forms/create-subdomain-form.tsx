@@ -2,6 +2,7 @@
 
 import { addSubDomain } from "~/app/_actions/actions";
 
+import { Label } from "~/components/ui/Label";
 import {
   Select,
   SelectContent,
@@ -10,7 +11,7 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/Label";
+import { Switch } from "~/components/ui/switch";
 import { FormLoadingButton } from "~/components/form-loading-button";
 import { toast } from "sonner";
 
@@ -36,7 +37,7 @@ export default function CreateSubdomainForm({
     >
       <div className="flex w-full gap-2">
         <div className="w-full">
-          <Label htmlFor="subdomain">Subdomain</Label>
+          <Label htmlFor="subdomain">Subdomain:</Label>
           <Input
             type="text"
             name="subdomain"
@@ -45,12 +46,12 @@ export default function CreateSubdomainForm({
           />
         </div>
         <div className="w-full">
-          <Label htmlFor="domain">Domain</Label>
+          <Label htmlFor="domain">Domain:</Label>
           <Input id="domain" value={"catway.org"} disabled />
         </div>
       </div>
       <div>
-        <Label htmlFor="record">Record</Label>
+        <Label htmlFor="record">Record:</Label>
         <Select name="record">
           <SelectTrigger>
             <SelectValue placeholder="Record" />
@@ -63,8 +64,12 @@ export default function CreateSubdomainForm({
         </Select>
       </div>
       <div>
-        <Label htmlFor="content">Content</Label>
+        <Label htmlFor="content">Content:</Label>
         <Input type="text" name="content" id="content" placeholder="Content" />
+      </div>
+      <div className="mb-2 flex items-center gap-2">
+        <Label htmlFor="content">Proxied ( SSL ):</Label>
+        <Switch name="proxied" />
       </div>
       <input type="hidden" name="sessionuserid" value={sessionId} />
       <FormLoadingButton>Create</FormLoadingButton>

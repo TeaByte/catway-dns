@@ -64,6 +64,7 @@ model SubDomain {
   subdomain String @unique
   record    String
   content   String
+  isProxied Boolean @default(true)
 
   ownerId String
   owner   User   @relation(fields: [ownerId], references: [id])

@@ -50,6 +50,7 @@ export async function __createUserSubDomain(
   content: string,
   cloudflareId: string,
   userId: string,
+  isProxied: boolean,
 ) {
   return await db.subDomain.create({
     data: {
@@ -58,6 +59,7 @@ export async function __createUserSubDomain(
       id: cloudflareId,
       subdomain,
       ownerId: userId,
+      isProxied,
     },
   });
 }
@@ -66,6 +68,7 @@ export async function __updateUserSubDomain(
   content: string,
   record: string,
   subDomainId: string,
+  isProxied: boolean,
 ) {
   return await db.subDomain.update({
     where: {
@@ -74,6 +77,7 @@ export async function __updateUserSubDomain(
     data: {
       content,
       record,
+      isProxied,
     },
   });
 }

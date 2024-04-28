@@ -25,6 +25,7 @@ export const registerCloudflareDNS = async (
   record: RecordType,
   subdomain: string,
   ip: string,
+  proxied: boolean,
 ) => {
   try {
     const response: AxiosResponse = await axios.post(
@@ -34,7 +35,7 @@ export const registerCloudflareDNS = async (
         name: subdomain,
         content: ip,
         ttl: 1,
-        proxied: true,
+        proxied,
       },
       {
         headers: BASE_HEADERS,
@@ -51,6 +52,7 @@ export const editCloudflareDNS = async (
   record: RecordType,
   subdomain: string,
   ip: string,
+  proxied: boolean,
 ) => {
   try {
     const response: AxiosResponse = await axios.put(
@@ -60,7 +62,7 @@ export const editCloudflareDNS = async (
         name: subdomain,
         content: ip,
         ttl: 1,
-        proxied: true,
+        proxied,
       },
       {
         headers: BASE_HEADERS,

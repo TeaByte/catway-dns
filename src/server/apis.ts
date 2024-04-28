@@ -8,6 +8,7 @@ export async function createUserSubDomain(
   record: RecordType,
   content: string,
   userId: string,
+  proxied: boolean,
 ) {
   const userSubDomainsCount = await qr.getUserSubDomainsCount(userId);
   const user = await qr.getUser(userId);
@@ -20,7 +21,12 @@ export async function createUserSubDomain(
     throw new Error("Maximum number of subdomains reached");
   }
 
-  const cfResponse = await cf.registerCloudflareDNS(record, subdomain, content);
+  const cfResponse = await cf.registerCloudflareDNS(
+    record,
+    subdomain,
+    content,
+    proxied,
+  );
   if (!cfResponse.success) {
     if (cfResponse.errors) {
       throw new Error(cfResponse.errors[0]?.message);
@@ -39,6 +45,7 @@ export async function createUserSubDomain(
       content,
       cloudflareId,
       userId,
+      proxied,
     );
   }
 }
@@ -48,6 +55,7 @@ export async function updateUserSubDomain(
   record: RecordType,
   subDomainId: string,
   ownerId: string,
+  proxied: boolean,
 ) {
   const subDomainData = await qr.getSubDomainById(subDomainId);
 
@@ -64,6 +72,7 @@ export async function updateUserSubDomain(
     record,
     subDomainData.subdomain,
     content,
+    proxied,
   );
 
   if (!cfResponse.success) {
@@ -73,7 +82,12 @@ export async function updateUserSubDomain(
       throw new Error(cf.UNKNOWN_ERROR[0]?.message);
     }
   } else {
-    return await qr.__updateUserSubDomain(content, record, subDomainId);
+    return await qr.__updateUserSubDomain(
+      content,
+      record,
+      subDomainId,
+      proxied,
+    );
   }
 }
 

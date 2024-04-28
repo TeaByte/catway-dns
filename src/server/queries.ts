@@ -14,6 +14,26 @@ export async function getUserSubDomains(userId: string) {
   return subdomains;
 }
 
+export async function getUser(userId: string) {
+  const user = await db.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+
+  return user;
+}
+
+export async function getUserSubDomainsCount(userId: string) {
+  const count = await db.subDomain.count({
+    where: {
+      ownerId: userId,
+    },
+  });
+
+  return count;
+}
+
 export async function getSubDomainById(subDomainId: string) {
   const subDomain = await db.subDomain.findUnique({
     where: {

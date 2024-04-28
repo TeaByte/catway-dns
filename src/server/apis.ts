@@ -1,6 +1,7 @@
 import * as qr from "./queries";
 import * as cf from "./cloudflare/apis";
 import type { RecordType } from "./cloudflare/types";
+import { use } from "react";
 
 export async function createUserSubDomain(
   subdomain: string,
@@ -8,6 +9,17 @@ export async function createUserSubDomain(
   content: string,
   userId: string,
 ) {
+  const userSubDomainsCount = await qr.getUserSubDomainsCount(userId);
+  const user = await qr.getUser(userId);
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  if (userSubDomainsCount >= user.maxDomains) {
+    throw new Error("Maximum number of subdomains reached");
+  }
+
   const cfResponse = await cf.registerCloudflareDNS(record, subdomain, content);
   if (!cfResponse.success) {
     if (cfResponse.errors) {

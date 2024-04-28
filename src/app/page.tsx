@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 import { authOptions } from "~/server/auth";
-import { getUserSubDomains } from "~/server/queries";
+import { getUserSubDomains, getUser } from "~/server/queries";
 
 import { ExternalLink } from "lucide-react";
 import { Input } from "~/components/ui/input";
@@ -24,13 +24,15 @@ export default async function HomePage() {
     );
   }
 
+  const user = await getUser(session.user.id);
   const subDomains = await getUserSubDomains(session.user.id);
+
   return (
     <main className="mx-4 mt-6 flex flex-col items-center justify-center gap-6 md:mx-[200px] md:mt-10 lg:mx-[300px] xl:mx-[400px] 2xl:mx-[600px]">
       <CreateSubdomainForm sessionId={session.user.id} />
       <section className="flex w-full flex-col items-center justify-center overflow-y-auto">
         <p className="w-full pb-1 text-start text-sm font-semibold">
-          You have {subDomains.length}/5 Subdomains
+          You have {subDomains.length}/{user?.maxDomains}
         </p>
         {subDomains.map((subDomain) => (
           <div

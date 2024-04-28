@@ -4,7 +4,6 @@ import { useSession, signIn, signOut, getProviders } from "next-auth/react";
 import { useEffect, useState } from "react"; // Import Provider type
 
 export function SignIn() {
-  // @ts-ignore
   const [providers, setProviders] = useState<any>(null);
   const { data: session, status } = useSession();
 
@@ -22,7 +21,6 @@ export function SignIn() {
   return (
     <>
       {providers &&
-        // @ts-ignore
         Object.values(providers).map((provider: any) => (
           <div key={provider.name}>
             <button onClick={() => signIn(provider.id)}>

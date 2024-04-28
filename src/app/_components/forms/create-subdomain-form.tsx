@@ -69,7 +69,7 @@ export default function CreateSubdomainForm({
       </div>
       <div className="mb-2 flex items-center gap-2">
         <Label htmlFor="content">Proxied ( SSL ):</Label>
-        <Switch name="proxied" />
+        <Switch defaultChecked={true} name="proxied" />
       </div>
       <input type="hidden" name="sessionuserid" value={sessionId} />
       <FormLoadingButton>Create</FormLoadingButton>

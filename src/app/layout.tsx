@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`dark font-sans ${font.variable}`}>
+      <body className={`dark ${font.className}`}>
         <AuthProvider>
           <TopNav />
           {children}

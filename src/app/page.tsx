@@ -7,6 +7,7 @@ import { getUserSubDomains, getUser } from "~/server/queries";
 import { ExternalLink, Database } from "lucide-react";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
+import LandingPage from "./_components/landing-page";
 
 import CreateSubdomainForm from "./_components/forms/create-subdomain-form";
 import DeleteSubdomainForm from "./_components/forms/delete-subdomain-form";
@@ -16,11 +17,7 @@ export default async function HomePage() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return (
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <Link href="/login">Login</Link>
-      </main>
-    );
+    return <LandingPage />;
   }
 
   const user = await getUser(session.user.id);
@@ -41,7 +38,7 @@ export default async function HomePage() {
             >
               <div className="flex w-full justify-between gap-2">
                 <Input
-                  className="max-w-[150px] truncate text-center font-semibold opacity-60"
+                  className="truncate text-center text-lg font-semibold opacity-60"
                   value={subDomain.subdomain + ".catway.org"}
                   readOnly
                 />

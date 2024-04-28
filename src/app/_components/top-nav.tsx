@@ -15,7 +15,9 @@ export default function TopNav() {
             width={50}
             height={50}
           />
-          <h1 className="text-lg font-bold md:text-2xl">CatWay DNS</h1>
+          <h1 className="text-lg font-bold md:text-2xl">
+            CatWay<span className="hidden text-primary md:inline">DNS</span>
+          </h1>
         </div>
         <SessionButton />
       </nav>

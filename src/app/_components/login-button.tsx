@@ -5,7 +5,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { Button } from "~/components/ui/button";
 import { LogOut, Github } from "lucide-react";
 
-export function SignInButton() {
+export function SignInButton({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Button
@@ -15,7 +15,7 @@ export function SignInButton() {
         }}
       >
         <Github className="h-5 w-5" />
-        Sign in
+        {children}
       </Button>
     </>
   );
@@ -33,5 +33,5 @@ export default function SessionButton() {
       </>
     );
   }
-  return <SignInButton />;
+  return <SignInButton>Sign in</SignInButton>;
 }

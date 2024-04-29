@@ -1,4 +1,4 @@
-import { ExternalToast } from "sonner";
+import type { ExternalToast } from "sonner";
 
 export const toastErrorConfig: ExternalToast = {
   style: {

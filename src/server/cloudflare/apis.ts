@@ -48,10 +48,9 @@ export async function getTotalRequests() {
   `;
 
   const data = await client.request<any>(query);
-  const requests = data.viewer.zones[0].httpRequests1dGroups;
 
   const formattedData = data.viewer.zones[0].httpRequests1dGroups.map(
-    (entry) => ({
+    (entry: any) => ({
       date: new Date(entry.date.date).toLocaleDateString("en-US", {
         month: "numeric",
         day: "numeric",
@@ -66,7 +65,7 @@ export async function getTotalRequests() {
 const handleAxiosError = (error: AxiosError): CloudflareError[] => {
   if (axios.isAxiosError(error)) {
     if (error.response) {
-      const { data, status } = error.response;
+      const { data } = error.response;
       return (data as CloudflareAPIResponse).errors ?? UNKNOWN_ERROR;
     } else if (error.request) {
       return [{ code: 500, message: "Request Error" }];

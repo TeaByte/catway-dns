@@ -9,6 +9,9 @@ export async function getUserSubDomains(userId: string) {
         id: userId,
       },
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return subdomains;

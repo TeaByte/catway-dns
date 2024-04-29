@@ -15,7 +15,6 @@ import UpdateSubdomainForm from "./_components/forms/update-subdomain-from";
 
 export default async function HomePage() {
   const session = await getServerSession(authOptions);
-
   if (!session) {
     return <LandingPage />;
   }

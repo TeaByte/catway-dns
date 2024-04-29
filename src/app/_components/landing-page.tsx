@@ -1,11 +1,19 @@
+export const revalidate = 10800;
+
 import Image from "next/image";
+
+import { getTotalRequests } from "~/server/cloudflare/apis";
 
 import { SignInButton } from "./login-button";
 import { PawPrint } from "lucide-react";
+import RequestsChart from "./landing-chart";
+import { Info } from "lucide-react";
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const chartData = await getTotalRequests();
+
   return (
-    <main className="mx-4 mt-6 flex flex-col items-center justify-center gap-6 md:mx-[200px] md:mt-10 lg:mx-[300px] xl:mx-[400px] 2xl:mx-[700px]">
+    <main className="mx-4 mb-14 mt-6 flex flex-col items-center justify-center gap-6 md:mx-[200px] md:mt-10 lg:mx-[300px] xl:mx-[400px] 2xl:mx-[700px]">
       <div className="flex flex-col items-center gap-2">
         <Image
           title="CatWay cat logo"
@@ -23,6 +31,13 @@ export default function LandingPage() {
         <PawPrint className="h-5 w-5" />
         Leap In Now!
       </SignInButton>
+      <div className="w-full">
+        <div className="flex items-center gap-1">
+          <Info className="h-4 w-4" />
+          <p className="text-sm font-semibold">Total Requests:</p>
+        </div>
+        <RequestsChart data={chartData} />
+      </div>
     </main>
   );
 }

@@ -1,7 +1,6 @@
 import * as qr from "./queries";
 import * as cf from "./cloudflare/apis";
 import type { RecordType } from "./cloudflare/types";
-import { use } from "react";
 
 export async function createUserSubDomain(
   subdomain: string,

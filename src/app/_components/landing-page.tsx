@@ -33,13 +33,15 @@ export default async function LandingPage() {
         <PawPrint className="h-5 w-5" />
         Leap In Now!
       </SignInButton>
-      <div className="mt-6 w-full">
-        <div className="flex items-center gap-1">
-          <Info className="h-4 w-4" />
-          <p className="text-sm font-semibold">Last month requests:</p>
+      {chartData && (
+        <div className="mt-6 w-full">
+          <div className="flex items-center gap-1">
+            <Info className="h-4 w-4" />
+            <p className="text-sm font-semibold">Last month requests:</p>
+          </div>
+          <RequestsChart data={chartData} />
         </div>
-        <RequestsChart data={chartData} />
-      </div>
+      )}
     </main>
   );
 }

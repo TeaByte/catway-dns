@@ -27,7 +27,8 @@ const client = new GraphQLClient(
 );
 
 export async function getTotalRequests() {
-  const previousMonthDate = addMonths(new Date(), -1);
+  try {
+    const previousMonthDate = addMonths(new Date(), -1);
   const previousMonthDateString = format(previousMonthDate, "yyyy-MM-dd");
   console.log(previousMonthDateString);
   const query = `
@@ -64,6 +65,9 @@ export async function getTotalRequests() {
   );
 
   return formattedData as { date: string; requests: number }[];
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 const handleAxiosError = (error: AxiosError): CloudflareError[] => {

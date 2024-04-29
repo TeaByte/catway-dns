@@ -16,11 +16,13 @@ export default async function LandingPage() {
     <main className="mx-4 mb-14 mt-6 flex flex-col items-center justify-center gap-6 md:mx-[200px] md:mt-10 lg:mx-[300px] xl:mx-[400px] 2xl:mx-[700px]">
       <div className="flex flex-col items-center gap-2">
         <Image
+          draggable="false"
           title="CatWay cat logo"
           src="/cat-logo.webp"
           alt="logo"
           width={200}
           height={200}
+          className="h-36 w-36"
         />
         <p className="text-center text-lg font-semibold">
           Just like a cat finding its way home, Cat DNS ensures your devices and
@@ -31,7 +33,7 @@ export default async function LandingPage() {
         <PawPrint className="h-5 w-5" />
         Leap In Now!
       </SignInButton>
-      <div className="w-full">
+      <div className="mt-6 w-full">
         <div className="flex items-center gap-1">
           <Info className="h-4 w-4" />
           <p className="text-sm font-semibold">Total Requests:</p>

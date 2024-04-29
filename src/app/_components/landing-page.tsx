@@ -36,7 +36,7 @@ export default async function LandingPage() {
       <div className="mt-6 w-full">
         <div className="flex items-center gap-1">
           <Info className="h-4 w-4" />
-          <p className="text-sm font-semibold">Total Requests:</p>
+          <p className="text-sm font-semibold">Last month requests:</p>
         </div>
         <RequestsChart data={chartData} />
       </div>

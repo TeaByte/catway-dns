@@ -1,5 +1,6 @@
 import { GraphQLClient } from "graphql-request";
 import axios, { type AxiosError, type AxiosResponse } from "axios";
+import { addMonths, format } from "date-fns";
 
 import type {
   CloudflareAPIResponse,
@@ -26,15 +27,18 @@ const client = new GraphQLClient(
 );
 
 export async function getTotalRequests() {
+  const previousMonthDate = addMonths(new Date(), -1);
+  const previousMonthDateString = format(previousMonthDate, "yyyy-MM-dd");
+  console.log(previousMonthDateString);
   const query = `
   query {
     viewer {
       zones(filter: { zoneTag: "${process.env.CLOUDFLARE_ZONE_ID}" }) {
         httpRequests1dGroups(
           filter: { 
-            date_gt: "2024-02-29"
+            date_gt: "${previousMonthDateString}"
           }
-          limit: 1000
+          limit: 50
           orderBy: [date_ASC]
         ) {
           date: dimensions { date }        

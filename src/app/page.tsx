@@ -4,7 +4,7 @@ import Link from "next/link";
 import { authOptions } from "~/server/auth";
 import { getUserSubDomains, getUser } from "~/server/queries";
 
-import { ExternalLink, Database } from "lucide-react";
+import { ExternalLink, Database, Info } from "lucide-react";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import LandingPage from "./_components/landing-page";
@@ -27,7 +27,8 @@ export default async function HomePage() {
     <main className="mx-4 mt-6 flex flex-col items-center justify-center gap-6 md:mx-[200px] md:mt-10 lg:mx-[300px] xl:mx-[400px] 2xl:mx-[600px]">
       <CreateSubdomainForm sessionId={session.user.id} />
       <section className="mb-14 flex w-full flex-col items-center justify-center gap-2 overflow-y-auto">
-        <p className="w-full text-start text-sm font-semibold">
+        <p className="flex w-full items-center gap-1 text-start text-sm font-semibold">
+          <Info className="h-4 w-4" />
           You have ( {subDomains.length}/{user?.maxDomains} ) subdomains.
         </p>
         {subDomains.length > 0 ? (
@@ -38,7 +39,7 @@ export default async function HomePage() {
             >
               <div className="flex w-full justify-between gap-2">
                 <Input
-                  className="truncate text-center text-lg font-semibold opacity-60"
+                  className="text-shadow-lg truncate text-center text-lg font-semibold subpixel-antialiased opacity-60"
                   value={subDomain.subdomain + ".catway.org"}
                   readOnly
                 />

@@ -65,7 +65,7 @@ export default function UpdateSubdomainForm({
           </div>
           <input type="hidden" name="subdomainid" value={subDomainId} />
           <input type="hidden" name="sessionuserid" value={sessionId} />
-          <FormLoadingButton>Update</FormLoadingButton>
+          <FormLoadingButton text="Update" />
         </form>
       </DialogContent>
     </Dialog>

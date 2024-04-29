@@ -2,8 +2,10 @@ import "~/styles/globals.css";
 
 import { Rubik } from "next/font/google";
 
+import AuthProvider from "./_components/providers/auth-provider";
+import { CSPostHogProvider } from "./_components/providers/posthog-provider";
+
 import { Toaster } from "~/components/ui/sonner";
-import AuthProvider from "./_components/auth-provider";
 import TopNav from "./_components/top-nav";
 import Footer from "./_components/footer";
 
@@ -42,10 +44,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`dark ${font.className}`}>
         <AuthProvider>
-          <TopNav />
-          {children}
-          <Footer />
-          <Toaster />
+          <CSPostHogProvider>
+            <TopNav />
+            {children}
+            <Footer />
+            <Toaster />
+          </CSPostHogProvider>
         </AuthProvider>
       </body>
     </html>

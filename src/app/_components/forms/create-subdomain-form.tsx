@@ -72,7 +72,7 @@ export default function CreateSubdomainForm({
         <Switch defaultChecked={true} name="proxied" />
       </div>
       <input type="hidden" name="sessionuserid" value={sessionId} />
-      <FormLoadingButton>Create</FormLoadingButton>
+      <FormLoadingButton text="Create" />
     </form>
   );
 }

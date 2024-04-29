@@ -26,7 +26,7 @@ export default function DeleteSubdomainForm({
     <form action={clientAction} className="w-full">
       <input type="hidden" name="subdomainid" value={subDomainId} />
       <input type="hidden" name="sessionuserid" value={sessionId} />
-      <FormLoadingButton variant="destructive">Delete</FormLoadingButton>
+      <FormLoadingButton variant="destructive" text="Delete" />
     </form>
   );
 }

@@ -2,7 +2,7 @@
 
 - [x] Make cloudflare proxied ( SSL ) optinal using switch-shadcnUI
 - [x] Server action load state
-- [ ] Clean up cloudflare API
+- [x] Clean up cloudflare API ( Already done by cloudflare errors ) lazy to do it
 - [ ] Forms validation using zod
 - [x] Error handling with toasts
 - [x] Front-end, UI

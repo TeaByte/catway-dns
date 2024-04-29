@@ -1,6 +1,7 @@
 "use client";
 
 import { addSubDomain } from "~/app/_actions/actions";
+import { toastErrorConfig } from "./toast-error";
 
 import { Label } from "~/components/ui/label";
 import {
@@ -23,13 +24,9 @@ export default function CreateSubdomainForm({
   async function clientAction(formData: FormData) {
     const result = await addSubDomain(formData);
     if (result?.error) {
-      toast.error(result.error, {
-        position: "bottom-right",
-        duration: 3000,
-      });
+      toast.error(result.error, toastErrorConfig);
     }
   }
-
   return (
     <form
       action={clientAction}

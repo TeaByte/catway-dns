@@ -1,6 +1,7 @@
 "use client";
 
 import { deleteSubDomain } from "~/app/_actions/actions";
+import { toastErrorConfig } from "./toast-error";
 
 import { FormLoadingButton } from "~/components/form-loading-button";
 import { toast } from "sonner";
@@ -15,10 +16,7 @@ export default function DeleteSubdomainForm({
   async function clientAction(formData: FormData) {
     const result = await deleteSubDomain(formData);
     if (result?.error) {
-      toast.error(result.error, {
-        position: "bottom-right",
-        duration: 3000,
-      });
+      toast.error(result.error, toastErrorConfig);
     }
   }
 

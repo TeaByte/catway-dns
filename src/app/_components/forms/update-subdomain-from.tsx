@@ -1,6 +1,7 @@
 "use client";
 
 import { updateSubDomain } from "~/app/_actions/actions";
+import { toastErrorConfig } from "./toast-error";
 
 import SwitchButton from "~/components/switch-button";
 import { Input } from "~/components/ui/input";
@@ -27,10 +28,7 @@ export default function UpdateSubdomainForm({
   async function clientAction(formData: FormData) {
     const result = await updateSubDomain(formData);
     if (result?.error) {
-      toast.error(result.error, {
-        position: "bottom-right",
-        duration: 3000,
-      });
+      toast.error(result.error, toastErrorConfig);
     }
   }
 

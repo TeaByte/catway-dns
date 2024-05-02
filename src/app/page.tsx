@@ -23,7 +23,7 @@ export default async function HomePage() {
   const subDomains = await getUserSubDomains(session.user.id);
 
   return (
-    <main className="mx-4 mt-6 flex flex-col items-center justify-center gap-6 md:mx-[200px] md:mt-10 lg:mx-[300px] xl:mx-[400px] 2xl:mx-[600px]">
+    <main className="container mt-6 flex flex-col items-center justify-center gap-6 lg:w-1/2">
       <CreateSubdomainForm sessionId={session.user.id} />
       <section className="mb-14 flex w-full flex-col items-center justify-center gap-2 overflow-y-auto">
         <p className="flex w-full items-center gap-1 text-start text-sm font-semibold">
